@@ -2,7 +2,7 @@
 #
 # Table name: actors
 #
-#  id         :integer          not null, primary key
+#  id         :bigint           not null, primary key
 #  bio        :text
 #  dob        :date
 #  image      :string
@@ -12,4 +12,7 @@
 #
 class Actor < ApplicationRecord
   validates(:name, presence: true)
+
+  has_many(:characters, :class_name => "Character", :foreign_key => "actor_id")
+  has_many(:filmography, :through => :characters, :source => :movie)
 end
